@@ -76,8 +76,10 @@ function getUser(id) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log("Fetching user in a DB...");
-      // resolve({ id, githubUsername: "ndjerrou" });
-      reject(new Error('Access Network denied...'))
+
+      if (everythingIsGood) resolve({ id, githubUsername: "ndjerrou" });
+      
+      else reject(new Error('Access Network denied...'))
     }, 2000);
   });
 }
@@ -87,7 +89,7 @@ const fetchUser = async (id) => {
  try{
     const user =  await getUser(id)
     const repos = await getRepositories(user.githubUsername)
-    
+
     console.log('user = ', user);
   }
   catch(err){
